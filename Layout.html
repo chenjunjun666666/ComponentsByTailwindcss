@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsible Layout by Tailwindcss with no Javascript </title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<style>
+    @media screen and (max-width: 768px) {
+        #checkbox:checked~#aside {
+            transform: translateX(0);
+        }
+
+        #checkbox:checked~#main {
+            transform: translateX(75%);
+        }
+    }
+</style>
+
+<body>
+    <!-- 需求: 使用 Tailwindcss 原子库以纯 css 方式搭建移动端优先的响应式布局 -->
+    <!-- step 1: 导入 Tailwindcss -->
+    <!-- step 2: 编写布局总体框架 -->
+    <!-- step 3: 构建移动端和PC端视图 -->
+    <!-- step 4: 通过 Checkbox 添加响应式事件 -->
+    <!-- step 5: 添加过渡效果 -->
+    <!-- step 6: 不同尺寸下 checked 状态 BUG -->
+    <!-- 完成 -->
+
+    <!-- 
+        响应式断点: 
+        mobile < md
+        md < Laptop < xl
+        xl < pc
+     -->
+    <div class="overflow-x-hidden">
+        <input type="checkbox" id="checkbox" class="hidden">
+        <div id="aside"
+            class="bg-pink-300 w-3/4 md:w-[300px] h-screen fixed transform -translate-x-full md:translate-x-0 transition duration-200 ease">
+            aside
+        </div>
+        <div id="main" class="md:ml-[300px] transition duration-200 ease">
+            <div class="bg-purple-300 h-[66px] flex items-center px-4 justify-between">
+                <label for="checkbox" class="md:hidden">
+                    <i class='bx bx-menu bx-md'></i>
+                </label>
+                <span>header</span>
+            </div>
+            <div class="flex flex-col lg:flex-row gap-4 p-4">
+                <div class="bg-green-300 flex-grow h-[3000px]">content</div>
+                <div class="bg-blue-300 lg:w-[300px] flex-shrink-0 h-[300px]">navbar</div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
+
+</html>
